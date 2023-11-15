@@ -12,6 +12,17 @@ import java.io.IOException;
 public class ProdutoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int codigo = Integer.parseInt (request.getParameter ("codigo" ));
+        System.out.println ( " Código: " + codigo);
+
+        request.setAttribute ( "cod", codigo ) ;
+        request.setAttribute ( "nome","Caneta Vermelha");
+        request.getRequestDispatcher ("busca-produto.jsp" ).forward ( request , response ) ;
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //Recuperar os parâmetros do formulário HTML
@@ -27,6 +38,6 @@ public class ProdutoServlet extends HttpServlet {
         request.setAttribute("quantidade", qtd);
         request.setAttribute("valorProduto", valor);
 
-        request.getRequestDispatcher("/WEB-INF/").forward(request, response);
+        request.getRequestDispatcher("success.jsp").forward(request, response);
     }
 }
